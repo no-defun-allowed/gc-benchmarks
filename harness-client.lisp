@@ -8,6 +8,10 @@
           (list :mutator-real-time-ms
                 (- (getf r :real-time-ms 0)
                    (getf r :gc-real-time-ms 0))
+                :mutator-run-time-ms
+                (- (+ (getf r :system-run-time-ms 0)
+                      (getf r :user-run-time-ms 0))
+                   (getf r :gc-run-time-ms 0))
                 :small-allocation-count
                 (extern-alien "small_allocation_count" int))
           r)))

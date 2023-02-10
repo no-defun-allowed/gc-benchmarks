@@ -111,6 +111,7 @@
 
 (define-transformer :real-time-ms (v) (/ v 1000))
 (define-transformer :mutator-real-time-ms (v) (/ v 1000))
+(define-transformer :mutator-run-time-ms (v) (/ v 1000))
 (define-transformer :gc-real-time-ms (v) (/ v 1000))
 
 (defun run-tests ()
@@ -118,11 +119,11 @@
              (:worst-latency :real-time-ms)
              (:gencgc 2000 :par-gc 500))
   (test-case boehm-gc "boehm-gc.lisp" 2000 1000 8000
-             (:gc-real-time-ms :mutator-real-time-ms :real-time-ms)
+             (:gc-real-time-ms :mutator-real-time-ms :mutator-run-time-ms :real-time-ms)
              (:gencgc 3000 :par-gc 2000))
   (test-case regrind-interpret "regrind.lisp" 1000 1000 8000
-             (:gc-real-time-ms :mutator-real-time-ms :real-time-ms :small-allocation-count)
+             (:gc-real-time-ms :mutator-real-time-ms :mutator-run-time-ms :real-time-ms :small-allocation-count)
              (:gencgc 1000 :par-gc 1000))
   (test-case regrind-compile "regrind-compiling.lisp" 1000 1000 8000
-             (:gc-real-time-ms :mutator-real-time-ms :real-time-ms :small-allocation-count)
+             (:gc-real-time-ms :mutator-real-time-ms :mutator-run-time-ms :real-time-ms :small-allocation-count)
              (:gencgc 1000 :par-gc 1000)))
