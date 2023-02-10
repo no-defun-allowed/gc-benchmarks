@@ -107,7 +107,7 @@
   `(setf (gethash ,metric *transformers*)
          (lambda (,value) ,@body)))
 
-;;; :REAL-TIME-MS :USER-RUN-TIME-US 64 :SYSTEM-RUN-TIME-US :GC-REAL-TIME-MS :GC-RUN-TIME-MS :PROCESSOR-CYCLES :BYTES-CONSED
+;;; :REAL-TIME-MS :USER-RUN-TIME-US :SYSTEM-RUN-TIME-US :GC-REAL-TIME-MS :GC-RUN-TIME-MS :PROCESSOR-CYCLES :BYTES-CONSED
 
 (define-transformer :real-time-ms (v) (/ v 1000))
 (define-transformer :mutator-real-time-ms (v) (/ v 1000))
