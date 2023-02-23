@@ -31,6 +31,7 @@
 
 (defun dump-histogram (pathname hist)
   (with-open-file (s pathname :direction :output :if-exists :supersede)
+    (format s "time, count~%")
     (loop with total = (reduce #'+ hist)
           for bucket across hist
           for latency from 0 by +precision+
@@ -94,6 +95,8 @@ org.shirakumo.fraf.trial::
   (unwind-protect
        (resume-state (find-canonical-save "1") +main+)
     (write-line "Starting recording")
+    (ignore-errors
+     (sb-alien:alien-funcall (sb-alien:extern-alien "mr_reset_meters" (function sb-alien:void))))
     (setf cl-user::**running** t)))
 (defmethod finalize :after ((main main))
   (write-line "Stopping recording")
@@ -103,3 +106,5 @@ org.shirakumo.fraf.trial::
 (launch)
 (cl-user::dump-histogram #p"/tmp/kandria-frame.csv" cl-user::**frame-histogram**)
 (cl-user::dump-histogram #p"/tmp/kandria-pause.csv" cl-user::**pause-histogram**)
+(ignore-errors
+ (sb-alien:alien-funcall (sb-alien:extern-alien "mr_print_meters" (function sb-alien:void))))
