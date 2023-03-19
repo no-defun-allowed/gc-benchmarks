@@ -115,7 +115,7 @@
 (define-transformer :gc-real-time-ms (v) (/ v 1000))
 
 (defun run-tests ()
-  (test-case gc-latency "gc-latency.lisp" 500 500 8000
+  (test-case ring-buffer "ring-buffer.lisp" 500 500 8000
              (:worst-latency :real-time-ms)
              (:gencgc 2000 :par-gc 500))
   (test-case boehm-gc "boehm-gc.lisp" 2000 1000 8000
