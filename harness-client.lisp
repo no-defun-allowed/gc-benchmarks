@@ -12,9 +12,7 @@
                 (- (floor (+ (getf r :system-run-time-us 0)
                              (getf r :user-run-time-us 0))
                           1000)
-                   (getf r :gc-run-time-ms 0))
-                :small-allocation-count
-                (extern-alien "small_allocation_count" int))
+                   (getf r :gc-run-time-ms 0)))
           r)))
       (lambda () ,@body))
      (finish-output)

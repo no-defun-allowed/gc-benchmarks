@@ -122,8 +122,8 @@
              (:gc-real-time-ms :mutator-real-time-ms :mutator-run-time-ms :real-time-ms)
              (:gencgc 3000 :par-gc 2000))
   (test-case regrind-interpret "regrind.lisp" 1000 1000 8000
-             (:gc-real-time-ms :mutator-real-time-ms :mutator-run-time-ms :real-time-ms :small-allocation-count)
+             (:gc-real-time-ms :mutator-real-time-ms :mutator-run-time-ms :real-time-ms)
              (:gencgc 1000 :par-gc 1000))
   (test-case regrind-compile "regrind-compiling.lisp" 1000 1000 8000
-             (:gc-real-time-ms :mutator-real-time-ms :mutator-run-time-ms :real-time-ms :small-allocation-count)
+             (:gc-real-time-ms :mutator-real-time-ms :mutator-run-time-ms :real-time-ms)
              (:gencgc 1000 :par-gc 1000)))
