@@ -1,6 +1,6 @@
 (load (merge-pathnames #p"quicklisp/setup" (user-homedir-pathname)))
 (ql:quickload '(:bordeaux-threads :random-state :one-more-re-nightmare) :silent t)
-(load "harness-client")
+(load "../Harness/harness-client")
 
 ;;;; It's regrind time!
 

@@ -1,4 +1,4 @@
-(load "harness-client")
+(load "../Harness/harness-client")
 
 (declaim (optimize (speed 3) (safety 1)))
 

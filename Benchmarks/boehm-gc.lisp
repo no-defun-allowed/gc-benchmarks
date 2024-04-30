@@ -1,4 +1,4 @@
-(load "harness-client")
+(load "../Harness/harness-client")
 ;;; boehm-gc.lisp -- benchmark testing GC performance
 ;;
 ;; Time-stamp: <2016-05-10 13:07:17 jack>
