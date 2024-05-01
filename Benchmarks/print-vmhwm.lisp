@@ -1,0 +1,6 @@
+(with-open-file (s "/proc/self/status")
+  (loop for l = (read-line s nil :eof)
+        until (eq l :eof)
+        when (search "VmHWM" l)
+          do (write-line l)))
+(sb-ext:quit)

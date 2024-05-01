@@ -105,6 +105,10 @@
     (hook "Results for ~A" (b-name benchmark))
     (hook-upload pathname)))
 
+(defun run-benchmarks (directory)
+  (let ((*directory* directory))
+    (mapc #'run-benchmark *benchmarks*)))
+
 (define-benchmark ring-buffer "ring-buffer.lisp" 500 500 6000
   (:worst-latency :real-time-ms)
   (:gencgc 2000 :pmrgc 500))
