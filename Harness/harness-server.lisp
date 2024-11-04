@@ -33,8 +33,11 @@
            :directory (asdf:system-relative-pathname :gc-benchmarks "../Benchmarks/")
            :output :stream
            :environment (list (format nil "GC_THREADS=~d" gc-threads)))))
-    (assert (zerop (sb-ext:process-exit-code program)))
-    (read (sb-ext:process-output program))))
+    (unwind-protect
+         (progn
+           (assert (zerop (sb-ext:process-exit-code program)))
+           (read (sb-ext:process-output program)))
+      (close (sb-ext:process-output program)))))
 
 (defvar *iterations* 5)
 (defvar *warmups* 1)

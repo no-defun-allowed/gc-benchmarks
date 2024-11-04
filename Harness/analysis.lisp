@@ -2,7 +2,9 @@
 
 (defun load-results-from-file (pathname)
   (with-open-file (s pathname)
-    (loop for l = (read s nil :eof) until (eq l :eof) collecting l)))
+    (loop for l = (read s nil :eof) until (eq l :eof)
+          do (assert (> (length l) 3))
+          collecting l)))
 
 (defun csv-from-results (results metric &key (scale 1000) (stream *standard-output*))
   (let ((configurations
@@ -22,11 +24,14 @@
                (/ (loop for r in runs sum (getf r metric)) (length runs) scale))))
       (format stream "Heap size, ~{~{~A/~D~}~^, ~}~%" configurations)
       (loop for size in heap-sizes
-            do (format stream "~$, ~{~$~^, ~}~%"
+            do (format stream "~$, ~{~A~^, ~}~%"
                        (/ size 1000)
                        (loop for config in configurations
                              for (name threads) = config
-                             collect (average (find-result config size))))))))
+                             for result = (find-result config size)
+                             collect (if (null result)
+                                         ""
+                                         (format nil "~$" (average (find-result config size))))))))))
 
 (defun csvs-from-results (results &key (metrics '(:real-time-ms :gc-real-time-ms :mutator-run-time-ms)))
   (let ((name (pathname-name results))

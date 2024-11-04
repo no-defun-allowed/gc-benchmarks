@@ -28,12 +28,12 @@
     (dolist (th (i-threads install))
       (funcall function install th))))
 
-(define-installation old :pmrgc
-  "https://github.com/no-defun-allowed/swcl" "e93db450396048db5a32df4961e45df6638d7818"
-  ("--without-gencgc" "--with-mark-region-gc") "/tmp/old/" (0 1 3 11))
-(define-installation new :pmrgc
-  "https://github.com/no-defun-allowed/swcl" "24844e85965c0dc994a88434827d5d97a901ac81"
-  ("--without-gencgc" "--with-mark-region-gc") "/tmp/new/" (0 1 3 11))
+(define-installation mark-region :pmrgc
+  "https://github.com/no-defun-allowed/swcl" ""
+  ("--with-mark-region-gc") "/home/hayleyp/swcl/" (0 1 3 11))
+(define-installation gencgc :gencgc
+  "https://github.com/sbcl/sbcl" ""
+  () "/home/hayleyp/sbcl/" (0))
 
 (defun install ()
   (dolist (install *installations*)

@@ -1,5 +1,5 @@
 (load (merge-pathnames #p"quicklisp/setup" (user-homedir-pathname)))
-(ql:quickload '(:bordeaux-threads :random-state :one-more-re-nightmare) :silent t)
+(ql:quickload '(:bordeaux-threads :cl-cpus :one-more-re-nightmare :random-state) :silent t)
 (load "../Harness/harness-client")
 
 ;;;; It's regrind time!
@@ -44,8 +44,8 @@
       (setf (char haystack i) (code-char (+ 65 (repro-random 26)))))
     haystack))
 
-(defvar *tasks* 5000)
-(defvar *threads* 12)
+(defvar *tasks* 1000)
+(defvar *threads* (cl-cpus:get-number-of-processors))
 
 (defun generate-work ()
   (loop repeat *threads*
