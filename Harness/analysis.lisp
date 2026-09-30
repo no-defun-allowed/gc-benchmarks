@@ -33,7 +33,7 @@
                                          ""
                                          (format nil "~$" (average (find-result config size))))))))))
 
-(defun csvs-from-results (results &key (metrics '(:real-time-ms :gc-real-time-ms :mutator-run-time-ms)))
+(defun csvs-from-results (results &key (metrics '(:real-time-ms :gc-real-time-ms :mutator-run-time-ms :memory-hwm)))
   (let ((name (pathname-name results))
         (results (load-results-from-file results)))
     (dolist (metric metrics)

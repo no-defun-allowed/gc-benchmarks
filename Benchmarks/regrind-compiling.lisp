@@ -44,7 +44,7 @@
       (setf (char haystack i) (code-char (+ 65 (repro-random 26)))))
     haystack))
 
-(defvar *tasks* 1000)
+(defvar *tasks* 5000)
 (defvar *threads* (cl-cpus:get-number-of-processors))
 
 (defun generate-work ()
